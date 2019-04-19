@@ -1,0 +1,16 @@
+version: '3.5'
+
+services:
+  ui:
+    container_name: oh-that-bridge-app
+    image: oh-that-bridge-app:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    ports:
+      - '8080:8080'
+    environment:
+      - NODE_ENV=development
