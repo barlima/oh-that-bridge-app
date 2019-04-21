@@ -1,21 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useQuery } from 'react-apollo-hooks';
 import { Segment } from 'semantic-ui-react';
 import styled from 'styled-components';
-
-const MOCK_BRIDGES = [
-  {
-    name: "Golden Gate Bridge"
-  },
-  {
-    name: "Harbour Bridge"
-  },
-  {
-    name: "Viaduc de Millau"
-  },
-  {
-    name: "Brooklyn Bridge"
-  }
-]
+import { BRIDGES_QUERY } from '../../graphql/queries/bridges-query';
 
 const BridgesWrapper = styled.div`
   display: flex;
@@ -36,11 +23,14 @@ const ExploreBridges = styled.h3`
 `
 
 const Bridges = () => {
-  const [bridges, setBridges] = useState([])
-  
+  const [bridges, setBridges] = useState([]);
+  const { data, loading } = useQuery(BRIDGES_QUERY, { suspend: false });
+
   useEffect(() => {
-    setBridges(MOCK_BRIDGES);
-  }, [])
+    if (data.bridges) {
+      setBridges(data.bridges);
+    }
+  }, [data])
 
   return (
     <BridgesWrapper>
@@ -48,7 +38,9 @@ const Bridges = () => {
         Explore bridges
       </ExploreBridges>
       {
-        bridges.length > 0 ?
+        loading ? (
+          <div>loading</div>
+        ) : (
           bridges.map(bridge => (
             <Bridge key={bridge.name}>
               <Segment>
@@ -56,10 +48,6 @@ const Bridges = () => {
               </Segment>
             </Bridge>
           ))
-        : (
-          <div>
-            Loading
-          </div>
         )
       }
     </BridgesWrapper>
