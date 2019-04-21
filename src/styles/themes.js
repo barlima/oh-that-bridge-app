@@ -8,5 +8,9 @@ export const theme = {
 
   landingPage: {
 
+  },
+
+  bridges: {
+    nameFont: 'Permanent Marker',
   }
 }

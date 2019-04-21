@@ -5,6 +5,9 @@ export const BRIDGES_QUERY = gql`
     bridges {
       id
       name
+      city
+      country
+      region
     }
   }
 `;

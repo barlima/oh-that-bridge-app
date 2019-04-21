@@ -53,7 +53,7 @@ const LandingPage = () => (
       </Note>
       <SearchButton>
         <Link to="/map">
-          <Button inverted size="medium">
+          <Button active inverted size="medium">
             Search on Map
           </Button>
         </Link>
