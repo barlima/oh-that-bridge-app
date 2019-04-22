@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useQuery } from 'react-apollo-hooks';
+import React, { useContext, useMemo } from 'react';
 import styled from 'styled-components';
+import BridgesContext from '../../contexts/bridges-context';
 import BridgeCard from './BridgeCard';
-import { BRIDGES_QUERY } from '../../graphql/queries/bridges-query';
+import BridgesMenu from './BridgesMenu';
 
 const BridgesWrapper = styled.div`
   display: flex;
@@ -18,28 +18,21 @@ const ExploreBridges = styled.h3`
 `
 
 const Bridges = () => {
-  const [bridges, setBridges] = useState([]);
-  const { data, loading } = useQuery(BRIDGES_QUERY, { suspend: false });
+  const [ bridges, _ ] = useContext(BridgesContext);
 
-  useEffect(() => {
-    if (data.bridges) {
-      setBridges(data.bridges);
-    }
-  }, [data])
+  const filteredBridges = useMemo(() => {
+    return bridges.filter(bridge => bridge.name.toLowerCase().includes("emanuel"));
+  })
 
   return (
     <BridgesWrapper>
       <ExploreBridges>
-        Explore bridges
+        <BridgesMenu /> 
       </ExploreBridges>
       {
-        loading ? (
-          <div>loading</div>
-        ) : (
-          bridges.map(bridge => (
-            <BridgeCard key={bridge.id} bridge={bridge} />
-          ))
-        )
+        bridges && bridges.map(bridge => (
+          <BridgeCard key={bridge.id} bridge={bridge} />
+        ))
       }
     </BridgesWrapper>
   )
