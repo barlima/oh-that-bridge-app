@@ -1,66 +1,104 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useQuery } from 'react-apollo-hooks';
 import styled from 'styled-components';
 import { Dropdown, Input } from 'semantic-ui-react';
-import { BRIDGES_QUERY } from '../../graphql/queries/bridges-query';
+import BridgesSearchContext from '../../contexts/bridges-search-context';
+import { BRIDGES_COUNTRIES_QUERY } from '../../graphql/queries/bridges-countries-query';
+
+const SORT_OPTIONS = [
+  {
+    key: 'alphabetical_asc',
+    value: 'alphabetical_asc',
+    text: 'Alphabetical (A-Z)'
+  },
+  {
+    key: 'alphabetical_desc',
+    value: 'alphabetical_desc',
+    text: 'Alphabetical (Z-A)'
+  },
+  {
+    key: 'oldest',
+    value: 'oldest',
+    text: 'Oldest'
+  },
+  {
+    key: 'newest',
+    value: 'newest',
+    text: 'Newest'
+  }
+]
 
 const Menu = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  max-width: 600px;
 `
 
 const Search = styled.div`
-  flex: 0.6;
+  flex: 0.4;
 `
 
 const Filter = styled.div`
-  flex: 0.2;
+  flex: 0.3;
   margin: 0 1em;
+  margin-bottom: auto;
+  margin-top: auto;
 `
 
 const Sort = styled.div`
-  flex: 0.2
+  flex: 0.3;
+  margin-bottom: auto;
+  margin-top: auto;
 `
 
-const BridgesMenu = ({ setBridges }) => {
-  const [nameLike, setNameLike] = useState('');
-  const [filter, setFilter] = useState({ key: "", value: "" });
-  const [sort, setSort] = useState('');
-  const { loading, data } = useQuery(BRIDGES_QUERY, {
-    variables: {
-      nameLike: nameLike
+const BridgesMenu = ({ filter }) => {
+  const { data, loading, errors } = useQuery(BRIDGES_COUNTRIES_QUERY, { suspend: false });
+  const [ setSearchPhrase, setFilter, setSort ] = useContext(BridgesSearchContext);
+  const [ countries, setCountries ] = useState([])
+
+  const truncateName = name => {
+    if(name.length > 12) {
+      return name.slice(0, 10) + "...";
     }
-  });
+
+    return name;
+  }
 
   useEffect(() => {
-    if(!loading) {
-      // setBridges(data.bridges);
-      console.log(data.bridges);
+    if(!loading && !errors) {
+      const countries = data.bridges.map(b => b.country);
+      const uniqCountries = [ ...new Set(countries), "All" ];
+
+      setCountries(uniqCountries.map(c => ({
+        key: c,
+        value: c,
+        text: c
+      })));
     }
-  }, [nameLike])
+  }, [data])
 
   return (
     <Menu>
       <Search>
-        <Input fluid placeholder='Search' size="mini" onChange={e => setNameLike(e.target.value)}/>
+        <Input fluid placeholder='Search' onChange={e => setSearchPhrase(e.target.value)}/>
       </Search>
       <Filter>
         <Dropdown
           fluid
-          text='Filter'
-          icon='filter'
-          floating
-          labeled
           button
           className='icon'
-        >
-          <Dropdown.Menu>
-            <Dropdown.Item>Important</Dropdown.Item>
-            <Dropdown.Item>Announcement</Dropdown.Item>
-            <Dropdown.Item>Discussion</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+          floating
+          labeled
+          scrolling
+          icon='filter'
+          options={countries}
+          text={truncateName(filter || 'Country')}
+          onChange={(_, data) => setFilter(data.value)}
+        />
       </Filter>
       <Sort>
         <Dropdown
@@ -70,7 +108,7 @@ const BridgesMenu = ({ setBridges }) => {
           floating
           labeled
           icon='sort'
-          options={[]}
+          options={SORT_OPTIONS}
           text='Sort'
         />
       </Sort>
