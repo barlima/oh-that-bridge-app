@@ -8,6 +8,7 @@ export const BRIDGES_QUERY = gql`
       city
       country
       region
+      imageUrl
     }
   }
 `;

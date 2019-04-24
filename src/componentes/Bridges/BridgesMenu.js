@@ -4,29 +4,7 @@ import styled from 'styled-components';
 import { Dropdown, Input } from 'semantic-ui-react';
 import BridgesSearchContext from '../../contexts/bridges-search-context';
 import { BRIDGES_COUNTRIES_QUERY } from '../../graphql/queries/bridges-countries-query';
-
-const SORT_OPTIONS = [
-  {
-    key: 'alphabetical_asc',
-    value: 'alphabetical_asc',
-    text: 'Alphabetical (A-Z)'
-  },
-  {
-    key: 'alphabetical_desc',
-    value: 'alphabetical_desc',
-    text: 'Alphabetical (Z-A)'
-  },
-  {
-    key: 'oldest',
-    value: 'oldest',
-    text: 'Oldest'
-  },
-  {
-    key: 'newest',
-    value: 'newest',
-    text: 'Newest'
-  }
-]
+import SORT_OPTIONS from '../../constants/sort-options';
 
 const Menu = styled.div`
   display: flex;
@@ -35,7 +13,7 @@ const Menu = styled.div`
   margin: 0 auto;
   margin-bottom: 20px;
   margin-top: 20px;
-  max-width: 600px;
+  max-width: 900px;
 `
 
 const Search = styled.div`
@@ -71,9 +49,19 @@ const BridgesMenu = ({ filter }) => {
   useEffect(() => {
     if(!loading && !errors) {
       const countries = data.bridges.map(b => b.country);
-      const uniqCountries = [ ...new Set(countries), "All" ];
+      const uniqCountries = [ ...new Set(countries) ];
 
-      setCountries(uniqCountries.map(c => ({
+      const sortedCountries = uniqCountries.sort((a, b) => {
+        if(a > b) {
+          return 1;
+        } else if ( a < b) {
+          return -1;
+        } else {
+          return 0;
+        }
+      });
+      
+      setCountries([ "All", ...sortedCountries].map(c => ({
         key: c,
         value: c,
         text: c
@@ -96,7 +84,7 @@ const BridgesMenu = ({ filter }) => {
           scrolling
           icon='filter'
           options={countries}
-          text={truncateName(filter || 'Country')}
+          text={truncateName(!filter || filter === 'All' ? 'Country' : filter)}
           onChange={(_, data) => setFilter(data.value)}
         />
       </Filter>
@@ -110,6 +98,7 @@ const BridgesMenu = ({ filter }) => {
           icon='sort'
           options={SORT_OPTIONS}
           text='Sort'
+          onChange={(_, data) => setSort(data.value)}
         />
       </Sort>
     </Menu>

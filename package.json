@@ -22,6 +22,7 @@
     "react-apollo": "^2.5.4",
     "react-apollo-hooks": "^0.4.5",
     "react-dom": "^16.8.6",
+    "react-infinite-scroller": "^1.2.4",
     "react-router-dom": "^5.0.0",
     "semantic-ui-react": "^0.86.0",
     "styled-components": "^4.2.0"

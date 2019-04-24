@@ -3,7 +3,7 @@ import { Button, Icon } from 'semantic-ui-react';
 import styled from 'styled-components';
 
 const Image = styled.div`
-  background-image: url('/images/landing_page.jpg');
+  background-image: url('${p => p.imageUrl}');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -52,11 +52,12 @@ const BridgeImage = ({ bridge }) => {
     <Image
       onMouseEnter={showInfo}
       onMouseLeave={hideInfo}
+      imageUrl={bridge.imageUrl}
     >
       {
         <Info visible={info}>
           <Location>
-            <Icon name="marker"/>{ bridge.city } { bridge.region || "" }, { bridge.country }
+            <Icon name="marker"/>{ bridge.city }{ bridge.region && ` ${bridge.region}` }, { bridge.country }
           </Location>
           <Options>
             <Button inverted size="mini">Map</Button>

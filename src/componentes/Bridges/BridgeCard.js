@@ -9,11 +9,19 @@ const Bridge = styled.div`
 `
 
 const BridgeName = styled.div`
-  min-height: 2.4em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 2.8rem;
+  width: 100%;
+  height: 100%:
+`
+
+const Name = styled.span`
   font-family: '${p => p.theme.bridges.nameFont}', sans-serif;
-  font-size: 1em;
+  font-size: 1.2rem;
   letter-spacing: 1.5px;
-  line-height: 1.2em;
+  line-height: 1.4rem;
   text-align: center;
 `
 
@@ -21,7 +29,11 @@ const BridgeCard = ({ bridge }) => (
   <Bridge>
     <Segment>
       <BridgeImage bridge={bridge} />
-      <BridgeName>{bridge.name}</BridgeName>
+      <BridgeName>
+        <Name>
+          {bridge.name}
+        </Name>    
+      </BridgeName>
     </Segment>
   </Bridge>
 )
