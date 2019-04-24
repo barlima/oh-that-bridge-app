@@ -5,6 +5,12 @@ import { Dropdown, Input } from 'semantic-ui-react';
 import BridgesSearchContext from '../../contexts/bridges-search-context';
 import { BRIDGES_COUNTRIES_QUERY } from '../../graphql/queries/bridges-countries-query';
 import SORT_OPTIONS from '../../constants/sort-options';
+import {
+  ALPHABETICAL_ASC,
+  ALPHABETICAL_DESC,
+  NEWEST,
+  OLDEST
+} from '../../constants/sort-options';
 
 const Menu = styled.div`
   display: flex;
@@ -33,7 +39,7 @@ const Sort = styled.div`
   margin-top: auto;
 `
 
-const BridgesMenu = ({ filter }) => {
+const BridgesMenu = ({ filter, sort }) => {
   const { data, loading, errors } = useQuery(BRIDGES_COUNTRIES_QUERY, { suspend: false });
   const [ setSearchPhrase, setFilter, setSort ] = useContext(BridgesSearchContext);
   const [ countries, setCountries ] = useState([])
@@ -42,8 +48,22 @@ const BridgesMenu = ({ filter }) => {
     if(name.length > 12) {
       return name.slice(0, 10) + "...";
     }
-
     return name;
+  }
+
+  const sortText = sort => {
+    switch(sort) {
+      case ALPHABETICAL_ASC:
+        return "A-Z";
+      case ALPHABETICAL_DESC:
+        return "Z-A";
+      case NEWEST:
+        return "Newest";
+      case OLDEST:
+        return "Oldest";
+      default:
+        return "Sort";
+    }
   }
 
   useEffect(() => {
@@ -97,7 +117,7 @@ const BridgesMenu = ({ filter }) => {
           labeled
           icon='sort'
           options={SORT_OPTIONS}
-          text='Sort'
+          text={sortText(sort)}
           onChange={(_, data) => setSort(data.value)}
         />
       </Sort>

@@ -52,7 +52,7 @@ const Bridges = () => {
       <BridgesWrapper>
         <ExploreBridges>
           <BridgesSearchContext.Provider value={[setSearchPhrase, setFilter, setSort]}>
-            <BridgesMenu filter={filter}/> 
+            <BridgesMenu filter={filter} sort={sort}/> 
           </BridgesSearchContext.Provider>
         </ExploreBridges>
           {

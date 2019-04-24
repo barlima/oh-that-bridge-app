@@ -35,7 +35,7 @@ export const sortByParam = (bridges, param) => {
       console.error("Sort by NEWEST not implemented yet");
       return bridges;
     case OLDEST:
-      console.error("Sort by NEWEST not implemented yet");
+      console.error("Sort by OLDEST not implemented yet");
       return bridges;
     default:
       return bridges;
