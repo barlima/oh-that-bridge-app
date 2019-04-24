@@ -1,4 +1,4 @@
-import React, { useContext, useState, useMemo, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import InfiniteScroll from 'react-infinite-scroller';
 import {
@@ -30,17 +30,20 @@ const Bridges = () => {
   const [ filter, setFilter ] = useState();
   const [ sort, setSort ] = useState();
 
-  const [ slowBridges, setSlowBridges ] = useState(bridges.slice(0, 7));
+  const [ slowBridges, setSlowBridges ] = useState([]);
+  const [ filteredBridges, setFilteredBridges ] = useState([ ...bridges ]);
 
-  const filteredBridges = useMemo(() => {
-    let filtered = filterByName(slowBridges, searchPhrase);
+  useEffect(() => {
+    let filtered = filterByName(bridges, searchPhrase);
     filtered = filterByCountry(filtered, filter);
     filtered = sortByParam(filtered, sort);
-    return filtered;
-  });
 
-  const loadMore = () => setSlowBridges(bridges.slice(0, slowBridges.length + 6))
-  const hasMore = () => slowBridges.length < bridges.length;
+    setFilteredBridges(filtered);
+    setSlowBridges(filtered.slice(0, 7));
+  }, [bridges, searchPhrase, filter, sort])
+
+  const loadMore = () => setSlowBridges(filteredBridges.slice(0, slowBridges.length + 6))
+  const hasMore = () => slowBridges.length < filteredBridges.length;
 
   return (
     <InfiniteScroll
@@ -56,7 +59,7 @@ const Bridges = () => {
           </BridgesSearchContext.Provider>
         </ExploreBridges>
           {
-            filteredBridges && filteredBridges.map(bridge => (
+            slowBridges && slowBridges.map(bridge => (
               <BridgeCard key={bridge.id} bridge={bridge} />
             ))
           }
