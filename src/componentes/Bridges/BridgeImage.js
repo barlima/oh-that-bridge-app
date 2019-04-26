@@ -16,10 +16,19 @@ const Image = styled.div`
     display: block;
     padding-bottom: 100%;
   }
+
+  & > div {
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+
+  &:hover > div {
+    opacity: 1;
+  }
 `
 
 const Info = styled.div`
-  background: rgba(0,0,0,0.2);
+  background: rgba(0,0,0,0.5);
   display: flex;
   flex-direction: column;
   justify-content: center;

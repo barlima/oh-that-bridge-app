@@ -16,6 +16,7 @@ const BridgesWrapper = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   margin: 0 15vw;
+  margin-bottom: 70px;
 `
 
 const ExploreBridges = styled.div`
@@ -39,7 +40,7 @@ const Bridges = () => {
     filtered = sortByParam(filtered, sort);
 
     setFilteredBridges(filtered);
-    setSlowBridges(filtered.slice(0, 7));
+    setSlowBridges(filtered.slice(0, 6));
   }, [bridges, searchPhrase, filter, sort])
 
   const loadMore = () => setSlowBridges(filteredBridges.slice(0, slowBridges.length + 6))
