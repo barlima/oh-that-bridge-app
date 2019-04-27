@@ -1,6 +1,8 @@
 const path = require("path");
 const webpack = require("webpack");
 
+require('dotenv').config({ path: '.env'});
+
 module.exports = {
   entry: "./src/index.js",
   mode: "development",
@@ -30,5 +32,10 @@ module.exports = {
     port: 8080,
     publicPath: "http://0.0.0.0:8080/dist/", 
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.GOOGLE_MAPS_API_KEY': JSON.stringify(process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
+    })
+  ],
 };
