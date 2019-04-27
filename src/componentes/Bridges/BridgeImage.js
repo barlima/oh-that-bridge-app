@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Icon } from 'semantic-ui-react';
 import styled from 'styled-components';
 
@@ -69,7 +70,12 @@ const BridgeImage = ({ bridge }) => {
             <Icon name="marker"/>{ bridge.city }{ bridge.region && ` ${bridge.region}` }, { bridge.country }
           </Location>
           <Options>
-            <Button inverted size="mini">Map</Button>
+            <Link to={{
+              pathname: "/map",
+              state: { bridge }
+            }}>
+              <Button inverted size="mini">Map</Button>
+            </Link>
             <Button inverted size="mini">More</Button>
           </Options>
         </Info>

@@ -48,11 +48,11 @@ const Bridges = () => {
 
   return (
     <InfiniteScroll
-        pageStart={0}
-        loadMore={loadMore}
-        hasMore={hasMore()}
-        loader={<div key={0}>Loading ...</div>}
-      >
+      pageStart={0}
+      loadMore={loadMore}
+      hasMore={hasMore()}
+      loader={<div key={0}>Loading ...</div>}
+    >
       <BridgesWrapper>
         <ExploreBridges>
           <BridgesSearchContext.Provider value={[setSearchPhrase, setFilter, setSort]}>
