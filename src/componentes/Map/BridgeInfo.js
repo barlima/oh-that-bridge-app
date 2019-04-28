@@ -2,13 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 import BridgeImage from '../Bridges/BridgeImage';
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+`
+
 const Image = styled.div`
   background-image: url('${p => p.imageUrl}');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  margin-bottom: 1rem;
-  position: relative;
+  margin-left: 25px;
+  margin-bottom: 25px;
+  margin-top: 5px;
   width: 200px;
 
   &:after {
@@ -18,6 +26,16 @@ const Image = styled.div`
   }
 `;
 
+const Name = styled.span`
+  font-size: 1.2rem;
+  letter-spacing: 1.5px;
+  line-height: 1.4rem;
+  text-align: center;
+  padding: 0;
+  padding-left: 25px;
+  padding-bottom: 12px;
+`
+
 const BridgeInfo = ({ bridge }) => {
 
   if(!bridge) {
@@ -25,10 +43,10 @@ const BridgeInfo = ({ bridge }) => {
   }
 
   return (
-    <div>
+    <Wrapper>
+      <Name>{bridge.name}</Name>
       <Image imageUrl={bridge.imageUrl}/>
-      <h1>{bridge.name}</h1>
-    </div>
+    </Wrapper>
   )
 }
 
