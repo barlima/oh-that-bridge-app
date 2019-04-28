@@ -76,7 +76,9 @@ const BridgeImage = ({ bridge }) => {
             }}>
               <Button inverted size="mini">Map</Button>
             </Link>
-            <Button inverted size="mini">More</Button>
+            <a href={bridge.moreInfoUrl} target="_blank">
+              <Button inverted size="mini">More</Button>
+            </a>
           </Options>
         </Info>
       }

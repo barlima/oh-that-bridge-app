@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import BridgeImage from '../Bridges/BridgeImage';
 
 const Wrapper = styled.div`
   display: flex;
@@ -32,7 +31,6 @@ const Name = styled.span`
   line-height: 1.4rem;
   text-align: center;
   padding: 0;
-  padding-left: 25px;
   padding-bottom: 12px;
 `
 

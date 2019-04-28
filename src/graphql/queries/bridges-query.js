@@ -9,6 +9,11 @@ export const BRIDGES_QUERY = gql`
       country
       region
       imageUrl
+      moreInfoUrl
+      location {
+        lng
+        lat
+      }
     }
   }
 `;
