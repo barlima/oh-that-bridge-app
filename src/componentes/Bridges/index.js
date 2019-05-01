@@ -25,6 +25,15 @@ const ExploreBridges = styled.div`
   width: 100%;
 `
 
+const Info = styled.div`
+  font-family: '${p => p.theme.bridges.nameFont}', sans-serif;
+  font-size: 2rem;
+  letter-spacing: 5px;
+  margin-top: 5vh;
+  text-align: center;
+  width: 100%;
+`
+
 const Bridges = () => {
   const [ bridges, _ ] = useContext(BridgesContext);
   const [ searchPhrase, setSearchPhrase ] = useState();
@@ -51,7 +60,7 @@ const Bridges = () => {
       pageStart={0}
       loadMore={loadMore}
       hasMore={hasMore()}
-      loader={<div key={0}>Loading ...</div>}
+      loader={<Info key={0}>Loading ...</Info>}
     >
       <BridgesWrapper>
         <ExploreBridges>
@@ -60,9 +69,14 @@ const Bridges = () => {
           </BridgesSearchContext.Provider>
         </ExploreBridges>
           {
-            slowBridges && slowBridges.map(bridge => (
+            slowBridges && 
+            slowBridges.map(bridge => (
               <BridgeCard key={bridge.id} bridge={bridge} />
-            ))
+            )) 
+          }
+          {
+            searchPhrase && slowBridges.length === 0 &&
+            <Info>Sorry, no results :(</Info>
           }
       </BridgesWrapper>
     </InfiniteScroll>

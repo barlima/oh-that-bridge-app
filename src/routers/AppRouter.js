@@ -5,6 +5,7 @@ import { createBrowserHistory } from 'history';
 import BridgesContext from '../contexts/bridges-context';
 import { BRIDGES_QUERY } from '../graphql/queries/bridges-query';
 
+import LoadingPage from '../componentes/LoadingPage/index';
 import LandingPage from '../componentes/LandingPage/index';
 import Map from '../componentes/Map/index';
 
@@ -22,6 +23,8 @@ const AppRouter = () => {
       })
     }
   }, [data])
+
+  if(loading) return <LoadingPage />;
 
   return(
     <Router history={history}>
