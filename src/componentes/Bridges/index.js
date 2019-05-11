@@ -13,10 +13,16 @@ import BridgesSearchContext from '../../contexts/bridges-search-context';
 
 const BridgesWrapper = styled.div`
   display: flex;
+  flex-direction:column;
+  margin: 0 15vw;
+  min-height: 100vh;
+  padding-bottom: 70px;
+`
+
+const BridgesList = styled.div`
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin: 0 15vw;
-  margin-bottom: 70px;
 `
 
 const ExploreBridges = styled.div`
@@ -68,6 +74,7 @@ const Bridges = () => {
             <BridgesMenu filter={filter} sort={sort}/> 
           </BridgesSearchContext.Provider>
         </ExploreBridges>
+        <BridgesList>
           {
             slowBridges && 
             slowBridges.map(bridge => (
@@ -78,6 +85,7 @@ const Bridges = () => {
             searchPhrase && slowBridges.length === 0 &&
             <Info>Sorry, no results :(</Info>
           }
+        </BridgesList>
       </BridgesWrapper>
     </InfiniteScroll>
   )
