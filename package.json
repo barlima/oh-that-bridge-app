@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --host 0.0.0.0 --port 8000"
+    "start": "webpack-dev-server --host 0.0.0.0 --port 8000",
+    "build:dev": "webpack",
+    "build:prod": "webpack -p --env production"
   },
   "author": "Bartlomiej Perucki",
   "license": "ISC",
@@ -15,6 +17,7 @@
     "@babel/preset-env": "7.1.0",
     "@babel/preset-react": "7.0.0",
     "apollo-boost": "^0.3.1",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "google-maps-react": "^2.0.2",
     "graphql": "^14.2.1",
     "graphql-tag": "^2.10.1",
