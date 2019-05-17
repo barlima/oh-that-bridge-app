@@ -39,13 +39,14 @@ module.exports = (env) => {
       contentBase: path.join(__dirname, "public/"),
       historyApiFallback: true,
       port: 8080,
-      publicPath: "http://0.0.0.0:8000/dist/", 
+      publicPath: "http://0.0.0.0:4000/dist/", 
     },
     plugins: [
       CSSExtract,
       new webpack.HotModuleReplacementPlugin(),
       new webpack.DefinePlugin({
-        'process.env.GOOGLE_MAPS_API_KEY': JSON.stringify(process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
+        'process.env.GOOGLE_MAPS_API_KEY': JSON.stringify(process.env.REACT_APP_GOOGLE_MAPS_API_KEY),
+        'process.env.SERVER': JSON.stringify(process.env.SERVER)
       })
     ],
   };
