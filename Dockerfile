@@ -13,6 +13,7 @@ ADD . /usr/src/app
 
 RUN yarn install --silent
 RUN yarn add react-scripts@1.1.1 -g --silent
+RUN yarn run build:prod
 
 # start app
 CMD ["yarn", "start"]
