@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Segment } from 'semantic-ui-react';
 import styled from 'styled-components';
 import BridgeImage from './BridgeImage';
@@ -27,11 +28,25 @@ const BridgeName = styled.div`
 `
 
 const Name = styled.span`
-  font-family: '${p => p.theme.bridges.nameFont}', sans-serif;
-  font-size: 1.2rem;
-  letter-spacing: 1.5px;
-  line-height: 1.4rem;
   text-align: center;
+  width: 100%;
+
+  * {
+    font-family: '${p => p.theme.bridges.nameFont}', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 1.5px;
+    line-height: 1.4rem;
+  }
+`
+
+const MapLink = styled(Link)`
+  text-align: center;
+  text-decoration: none;
+  color: black;
+
+  &:hover {
+    color: black;
+  }
 `
 
 const BridgeCard = ({ bridge }) => (
@@ -40,8 +55,13 @@ const BridgeCard = ({ bridge }) => (
       <BridgeImage bridge={bridge} />
       <BridgeName>
         <Name>
-          {bridge.name}
-        </Name>    
+          <MapLink to={{
+            pathname: "/map",
+            state: { bridge }
+          }}>
+            {bridge.name}
+          </MapLink>
+        </Name>
       </BridgeName>
     </Segment>
   </Bridge>

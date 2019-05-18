@@ -10,6 +10,15 @@ const Wrapper = styled.div`
   position: fixed;
   width: 100%;
   z-index: 100;
+
+  @media (
+    max-width: ${p => p.theme.media.maxWidth}
+  ) {
+    width: auto;
+    height: 95%;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
 `
 
 const BackToListButton = () => (
