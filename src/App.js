@@ -13,7 +13,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import BridgesContext from './contexts/bridges-context';
 import bridgesReducer, { INITIAL_STATE } from './reducers/bridges-reducer';
 
-const serverAddress = process.env.SERVER_IP;
+const serverAddress = process.env.SERVER;
 const client = new ApolloClient({
   link: new HttpLink({ uri: serverAddress }),
   cache: new InMemoryCache(),

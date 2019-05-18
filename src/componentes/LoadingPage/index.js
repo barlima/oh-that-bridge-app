@@ -15,6 +15,8 @@ const Loading = styled.div`
   height: 100vh;
   justify-content: center;
   letter-spacing: 5px;
+  line-height: calc(3rem + 5px);
+  padding: 10%;
 `
 
 const LoadingPage = () => (

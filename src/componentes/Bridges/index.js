@@ -17,12 +17,24 @@ const BridgesWrapper = styled.div`
   margin: 0 15vw;
   min-height: 100vh;
   padding-bottom: 70px;
+
+  @media (
+    max-width: ${p => p.theme.media.maxWidth}
+  ) {
+    margin: 5vw;
+  }
 `
 
 const BridgesList = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+
+  @media (
+    max-width: ${p => p.theme.media.maxWidth}
+  ) {
+    flex-direction: column;
+  }
 `
 
 const ExploreBridges = styled.div`

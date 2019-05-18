@@ -20,10 +20,23 @@ const Menu = styled.div`
   margin-bottom: 20px;
   margin-top: 20px;
   max-width: 900px;
+
+  @media (
+    max-width: ${p => p.theme.media.maxWidth}
+  ) {
+    flex-direction: column;
+  }
 `
 
 const Search = styled.div`
   flex: 0.4;
+
+  @media (
+    max-width: ${p => p.theme.media.maxWidth}
+  ) {
+    width: 100%;
+    margin-bottom: 5px;
+  }
 `
 
 const Filter = styled.div`
@@ -31,12 +44,26 @@ const Filter = styled.div`
   margin: 0 1em;
   margin-bottom: auto;
   margin-top: auto;
+  
+  @media (
+    max-width: ${p => p.theme.media.maxWidth}
+  ) {
+    width: 100%;
+    margin: 0;
+    margin-bottom: 5px;
+  }
 `
 
 const Sort = styled.div`
   flex: 0.3;
   margin-bottom: auto;
   margin-top: auto;
+  
+  @media (
+    max-width: ${p => p.theme.media.maxWidth}
+  ) {
+    width: 100%;
+  }
 `
 
 const BridgesMenu = ({ filter, sort }) => {

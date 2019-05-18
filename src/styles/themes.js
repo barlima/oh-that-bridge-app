@@ -15,5 +15,9 @@ export const theme = {
 
   bridges: {
     nameFont: 'Permanent Marker',
+  },
+
+  media: {
+    maxWidth: '900px',
   }
 }

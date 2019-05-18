@@ -6,6 +6,15 @@ import BridgeImage from './BridgeImage';
 const Bridge = styled.div`
   margin: 10px;
   width: calc(100%/3 - 20px);
+
+  @media (
+    max-width: ${p => p.theme.media.maxWidth}
+  ) {
+    width: 100%;
+    heigth: 100%;
+    margin: auto;
+    margin-bottom: 1em;
+  }
 `
 
 const BridgeName = styled.div`

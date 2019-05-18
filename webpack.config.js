@@ -5,7 +5,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 require('dotenv').config({ path: '.env'});
 
 module.exports = (env) => {
-  // const isProduction = env === "production";
+  const isProduction = env === "production";
   const CSSExtract = new ExtractTextPlugin('styles.css');
 
   return {
@@ -46,7 +46,9 @@ module.exports = (env) => {
       new webpack.HotModuleReplacementPlugin(),
       new webpack.DefinePlugin({
         'process.env.GOOGLE_MAPS_API_KEY': JSON.stringify(process.env.REACT_APP_GOOGLE_MAPS_API_KEY),
-        'process.env.SERVER': JSON.stringify(process.env.SERVER)
+        'process.env.SERVER': isProduction
+          ? undefined
+          : JSON.stringify(process.env.REACT_APP_SERVER)
       })
     ],
   };

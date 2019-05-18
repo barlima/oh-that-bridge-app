@@ -28,12 +28,35 @@ const Note = styled.span`
   line-height: 40px;
   text-shadow: 2px 2px 16px black;
   width: 100%;
+
+  @media (
+    max-width: ${p => p.theme.media.maxWidth}
+  ) {
+    font-size: 22px;
+    line-height: 26px;
+  }
 `
 
 const SearchButton = styled.div`
   margin: auto;
   margin-top: 12px;
   margin-bottom: 10%;
+
+  @media (
+    max-width: ${p => p.theme.media.maxWidth}
+  ) {
+    margin-bottom: 5px;
+  }
+`
+
+const ExploreButton = styled(ScrollLink)`
+  display: none;
+
+  @media (
+    max-width: ${p => p.theme.media.maxWidth}
+  ) {
+    display: block;
+  }
 `
 
 const Subnote = styled.div`
@@ -54,6 +77,13 @@ const Subnote = styled.div`
     &:last-of-type {
       text-align: right;
     }
+
+    @media (
+      max-width: ${p => p.theme.media.maxWidth}
+    ) {
+      font-size: 12px;
+      width: calc(100%/2);
+    }
   }
 `
 
@@ -71,10 +101,16 @@ const ExploreLink = styled(ScrollLink)`
       transform: scale(1.25);
     }
   }
+
+  @media (
+    max-width: ${p => p.theme.media.maxWidth}
+  ) {
+    display: none;
+  }
 `;
 
 const JumbotronLocation = styled.div`
-  bottom: -3px;
+  // bottom: -3px;
   position: relative;
 
   i {
@@ -101,6 +137,16 @@ const LandingPage = () => (
             </Button>
           </Link>
         </SearchButton>
+        <ExploreButton
+          to="bridges"
+          spy={true}
+          smooth={true}
+          duration={500}
+        >
+          <Button active inverted size="medium">
+            Explore
+          </Button>
+        </ExploreButton>
       </Content>
       <Subnote>
         <span>
