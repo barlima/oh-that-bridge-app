@@ -9,10 +9,6 @@ export const theme = {
     orange: '#ff7f50'
   },
 
-  landingPage: {
-
-  },
-
   bridges: {
     nameFont: 'Permanent Marker',
   },
