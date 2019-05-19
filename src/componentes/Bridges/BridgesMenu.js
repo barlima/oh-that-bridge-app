@@ -95,7 +95,8 @@ const BridgesMenu = ({ filter, sort }) => {
 
   useEffect(() => {
     if(!loading && !errors) {
-      const countries = data.bridges.map(b => b.country);
+      const countries =
+        data.bridges.map(b => b.country.split(';')).flat();
       const uniqCountries = [ ...new Set(countries) ];
 
       const sortedCountries = uniqCountries.sort((a, b) => {

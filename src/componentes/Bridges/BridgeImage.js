@@ -58,6 +58,11 @@ const BridgeImage = ({ bridge }) => {
   const showInfo = () => setInfo(true);
   const hideInfo = () => setInfo(false);
 
+  const { city, region, country } = bridge;
+  const bridgeLocation = city.includes(';') || country.includes(';')
+    ? country.split(';').join(' - ')
+    : city + (region ? ` ${region}, ` : ', ') + country
+
   return (
     <Image
       onMouseEnter={showInfo}
@@ -67,7 +72,7 @@ const BridgeImage = ({ bridge }) => {
       {
         <Info visible={info}>
           <Location>
-            <Icon name="marker"/>{ bridge.city }{ bridge.region && ` ${bridge.region}` }, { bridge.country }
+            <Icon name="marker"/>{ bridgeLocation }
           </Location>
           <Options>
             <Link to={{

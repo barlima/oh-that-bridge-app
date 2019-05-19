@@ -49,14 +49,17 @@ const SearchButton = styled.div`
   }
 `
 
-const ExploreButton = styled(ScrollLink)`
+const ExploreButton = styled.div`
+&&& {
   display: none;
+  margin: auto;
 
   @media (
     max-width: ${p => p.theme.media.maxWidth}
   ) {
     display: block;
   }
+}
 `
 
 const Subnote = styled.div`
@@ -137,15 +140,17 @@ const LandingPage = () => (
             </Button>
           </Link>
         </SearchButton>
-        <ExploreButton
-          to="bridges"
-          spy={true}
-          smooth={true}
-          duration={500}
-        >
-          <Button active inverted size="medium">
-            Explore
-          </Button>
+        <ExploreButton>
+          <ScrollLink
+            to="bridges"
+            spy={true}
+            smooth={true}
+            duration={500}
+          >
+            <Button active inverted size="medium">
+              Explore
+            </Button>
+          </ScrollLink>
         </ExploreButton>
       </Content>
       <Subnote>

@@ -32,11 +32,9 @@ export const sortByParam = (bridges, param) => {
     case ALPHABETICAL_DESC:
       return sortAlphabeticaly(bridges).reverse();
     case NEWEST:
-      console.error("Sort by NEWEST not implemented yet");
-      return bridges;
+      return sortByYear(bridges).reverse();
     case OLDEST:
-      console.error("Sort by OLDEST not implemented yet");
-      return bridges;
+      return sortByYear(bridges);
     default:
       return bridges;
   }
@@ -47,6 +45,18 @@ const sortAlphabeticaly = bridges => {
     if(a.name > b.name) {
       return 1;
     } else if (a.name < b.name) {
+      return -1;
+    } else {
+      return 0;
+    }
+  })
+}
+
+const sortByYear = bridges => {
+  return bridges.sort((a, b) => {
+    if(a.year > b.year) {
+      return 1;
+    } else if (a.year < b.year) {
       return -1;
     } else {
       return 0;
