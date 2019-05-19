@@ -5,10 +5,14 @@ import {
   OLDEST
 } from '../constants/sort-options';
 
-export const filterByName = (bridges, name) => {
+export const filterBridges = (bridges, phrase) => {
   return bridges.filter(bridge => {
-    if(name){
-      return bridge.name.toLowerCase().includes(name)
+    if(phrase){
+      const { name, city, country } = bridge
+      
+      return name.toLowerCase().includes(phrase) ||
+        city.toLowerCase().includes(phrase) ||
+        country.toLowerCase().includes(phrase);
     } else {
       return bridges;
     }

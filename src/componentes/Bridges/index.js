@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import InfiniteScroll from 'react-infinite-scroller';
 import {
-  filterByName,
+  filterBridges,
   filterByCountry,
   sortByParam
 } from '../../selectors/bridges-selector';
@@ -62,7 +62,7 @@ const Bridges = () => {
   const [ filteredBridges, setFilteredBridges ] = useState([ ...bridges ]);
 
   useEffect(() => {
-    let filtered = filterByName(bridges, searchPhrase);
+    let filtered = filterBridges(bridges, searchPhrase);
     filtered = filterByCountry(filtered, filter);
     filtered = sortByParam(filtered, sort);
 
