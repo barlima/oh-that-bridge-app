@@ -94,7 +94,7 @@ const BridgesMenu = ({ filter, sort }) => {
   }
 
   useEffect(() => {
-    if(!loading && !errors) {
+    if(!loading && !errors && data.bridges) {
       const countries =
         data.bridges.map(b => b.country.split(';')).flat();
       const uniqCountries = [ ...new Set(countries) ];
